@@ -62,9 +62,6 @@ class GamePageOpenState extends State<GamePageOpen> {
     switch (direction) {
       case Direction.up:
         if (snakePosition.last < grow) {
-          if (gBox == 'Closed') {
-            gameOver();
-          }
           snakePosition.add(snakePosition.last + grow * gColumn);
         } else {
           snakePosition.add(snakePosition.last - grow);
@@ -72,9 +69,6 @@ class GamePageOpenState extends State<GamePageOpen> {
         break;
       case Direction.down:
         if (snakePosition.last > grow * gColumn) {
-          if (gBox == 'Closed') {
-            gameOver();
-          }
           snakePosition.add(snakePosition.last - grow * gColumn);
         } else {
           snakePosition.add(snakePosition.last + grow);
@@ -82,9 +76,6 @@ class GamePageOpenState extends State<GamePageOpen> {
         break;
       case Direction.left:
         if (snakePosition.last % grow == 0) {
-          if (gBox == 'Closed') {
-            gameOver();
-          }
           snakePosition.add(snakePosition.last + grow - 1);
         } else {
           snakePosition.add(snakePosition.last - 1);
@@ -92,9 +83,6 @@ class GamePageOpenState extends State<GamePageOpen> {
         break;
       case Direction.right:
         if ((snakePosition.last + 1) % grow == 0) {
-          if (gBox == 'Closed') {
-            gameOver();
-          }
           snakePosition.add(snakePosition.last - grow + 1);
         } else {
           snakePosition.add(snakePosition.last + 1);
