@@ -6,16 +6,16 @@ import 'internal/globals.dart';
 
 enum Direction { up, down, left, right }
 
-class GamePage extends StatefulWidget {
-  const GamePage({super.key});
+class GamePageClosed extends StatefulWidget {
+  const GamePageClosed({super.key});
   @override
-  State<GamePage> createState() => GamePageState();
+  State<GamePageClosed> createState() => GamePageClosedState();
 }
 
-class GamePageState extends State<GamePage> {
+class GamePageClosedState extends State<GamePageClosed> {
   Direction direction = Direction.down;
   var random = Random();
-  int fruit = 10;
+  int fruit = 50;
   int score = 0;
   var snakePosition = [0, 20, 40];
 
@@ -47,8 +47,8 @@ class GamePageState extends State<GamePage> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return const GamePage();
-                      }));
+                            return const GamePageClosed();
+                          }));
                     },
                     child: const Text("Try Again")),
                 TextButton(
@@ -62,40 +62,28 @@ class GamePageState extends State<GamePage> {
     switch (direction) {
       case Direction.up:
         if (snakePosition.last < grow) {
-          if (gBox == 'Closed') {
             gameOver();
-          }
-          snakePosition.add(snakePosition.last + grow * gColumn);
         } else {
           snakePosition.add(snakePosition.last - grow);
         }
         break;
       case Direction.down:
         if (snakePosition.last > grow * gColumn) {
-          if (gBox == 'Closed') {
             gameOver();
-          }
-          snakePosition.add(snakePosition.last - grow * gColumn);
         } else {
           snakePosition.add(snakePosition.last + grow);
         }
         break;
       case Direction.left:
         if (snakePosition.last % grow == 0) {
-          if (gBox == 'Closed') {
             gameOver();
-          }
-          snakePosition.add(snakePosition.last + grow - 1);
         } else {
           snakePosition.add(snakePosition.last - 1);
         }
         break;
       case Direction.right:
         if ((snakePosition.last + 1) % grow == 0) {
-          if (gBox == 'Closed') {
             gameOver();
-          }
-          snakePosition.add(snakePosition.last - grow + 1);
         } else {
           snakePosition.add(snakePosition.last + 1);
         }
@@ -141,13 +129,13 @@ class GamePageState extends State<GamePage> {
               child: Container(
                   height: profileH.toDouble() - 70,
                   width: profileW.toDouble(),
-                  color: Colors.black,
+                  color: Colors.red,
                   child: GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.all(10),
                       itemCount: grow * gColumn,
                       gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: grow,
                         //mainAxisSpacing: 0.5,
                         //crossAxisSpacing: 0.5,

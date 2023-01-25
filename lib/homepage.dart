@@ -1,5 +1,7 @@
+import 'package:SnakeHost/closed_game.dart';
+import 'package:SnakeHost/internal/globals.dart';
 import 'package:flutter/material.dart';
-import 'game.dart';
+import 'open_game.dart';
 import 'internal/drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,7 +59,11 @@ class HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return const GamePage();
+                    if (gBox == 'Opened') {
+                      return const GamePageOpen();
+                    } else {
+                      return const GamePageClosed();
+                    }
                   }));
                 },
                 child: Container(
